@@ -6,7 +6,7 @@ import { useState } from "react";
 interface Props {
   options: { key: string; value: string }[];
   value: string;
-  onChange: Function;
+  onChange: (value: string) => void;
   disabled?: boolean;
 }
 
