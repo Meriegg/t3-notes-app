@@ -12,12 +12,16 @@ const buttonStyles = cva(
           "bg-white text-black hover:bg-gray-100 focus:ring focus:ring-white",
         danger:
           "bg-red-600 text-white hover:bg-red-700 focus:ring focus:ring-red-800",
+        ghost:
+          "bg-transparent hover:bg-hover-transparent-100 active:bg-hover-transparent-200",
+        dark: "bg-gray-900 text-white focus:ring focus:ring-gray-800",
       },
       size: {
         sm: "text-sm",
         md: "text-base",
         lg: "text-md",
         xl: "text-xl",
+        xsm: "text-sm px-4",
       },
       rounded: {
         sm: "rounded-sm",

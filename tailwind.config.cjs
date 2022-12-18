@@ -22,6 +22,11 @@ module.exports = {
         xsm: { max: "358px" },
         // => @media (max-width: 358px) { ... }
       },
+      colors: {
+        "hover-transparent-100": "rgba(255, 255, 255, 0.1)",
+        "hover-transparent-200": "rgba(255, 255, 255, 0.1)",
+        "hover-transparent-300": "rgba(255, 255, 255, 0.1)",
+      },
     },
   },
   plugins: [],

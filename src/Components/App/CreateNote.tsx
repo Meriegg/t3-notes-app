@@ -1,11 +1,28 @@
 import Input from "../Ui/Input";
 import Button from "../Ui/Button";
+import { trpc } from "@/utils/trpc";
 import { useState } from "react";
-import { z } from "zod";
 
 const CreateNote = () => {
+  const ctx = trpc.useContext();
+  const createNote = trpc.notes.createNote.useMutation({
+    onSuccess: () => {
+      ctx.notes.getNotes.invalidate();
+    },
+  });
   const [inputVal, setInputVal] = useState("");
   const [inputError, setInputError] = useState<string | null>(null);
+
+  const submit = () => {
+    if (!inputVal.trim()) {
+      setInputError("This must not be empty");
+      return;
+    }
+
+    createNote.mutate({ content: inputVal });
+    setInputVal("");
+    setInputError(null);
+  };
 
   return (
     <div
@@ -22,11 +39,16 @@ const CreateNote = () => {
         error={inputError}
       />
       <div className="mt-2 flex w-full justify-between">
-        <Button className="mt-2" variant={{ intent: "secondary" }}>
+        <Button
+          onClick={() => submit()}
+          className="mt-2"
+          variant={{ intent: "secondary" }}
+        >
           Create Note!
         </Button>
         <Button
           disabled={!inputVal}
+          onClick={() => setInputVal("")}
           variant={{
             intent: "danger",
           }}

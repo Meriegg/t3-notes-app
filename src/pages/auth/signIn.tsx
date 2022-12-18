@@ -1,5 +1,6 @@
 import getServerSession from "@/server/common/get-server-session";
 import Button from "@/Components/Ui/Button";
+import GithubLogo from "@/../public/icons/github-mark.svg";
 import { useRouter } from "next/router";
 import {
   GetServerSideProps,
@@ -30,15 +31,10 @@ const SignIn: NextPage<
     );
   }
 
-  const providerBtnIcons: { [key: string]: string } = {
-    Google:
-      "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg",
-  };
-
   return (
     <div className="flex w-full items-center justify-center">
       <div className="mt-32 flex flex-col items-center px-2">
-        <h1 className="text-6xl font-extrabold tracking-tighter ">
+        <h1 className="text-center text-6xl font-extrabold tracking-tighter">
           Sign in to continue!
         </h1>
 
@@ -48,19 +44,34 @@ const SignIn: NextPage<
           </div>
         ) : null}
 
-        {Object.values(providers).map((provider) => (
+        <div className="mt-8 grid grid-cols-2 gap-6 md:grid-cols-1">
           <Button
-            onClick={() => signIn(provider.id)}
-            variant={{ size: "md" }}
-            className="mt-6 flex gap-3 font-semibold"
+            onClick={() => signIn(providers["google"].id)}
+            variant={{ size: "md", intent: "secondary" }}
+            className="flex gap-3 font-semibold"
           >
             <img
-              alt={`${provider.name}`}
-              src={providerBtnIcons[provider.name]}
+              alt={"Google logo"}
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
             />
-            Continue with {provider.name}
+            Continue with Google
           </Button>
-        ))}
+          <Button
+            onClick={() => signIn(providers["google"].id)}
+            variant={{ size: "md", intent: "dark" }}
+            className="flex gap-3 font-semibold"
+          >
+            <div
+              className="h-6 w-6"
+              style={{
+                backgroundImage: `url(${GithubLogo.src})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
+            Continue with Github
+          </Button>
+        </div>
       </div>
     </div>
   );

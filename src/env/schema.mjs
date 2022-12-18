@@ -9,6 +9,8 @@ export const serverSchema = z.object({
   DATABASE_URL: z.string().url(),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
+  GITHUB_CLIENT_ID: z.string(),
+  GITHUB_CLIENT_SECRET: z.string(),
   NEXTAUTH_URL: z.string().url(),
   JWT_SECRET: z.string().min(32),
   NODE_ENV: z.enum(["development", "test", "production"]),
