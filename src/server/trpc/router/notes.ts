@@ -6,7 +6,7 @@ export const notesRouter = router({
   getNotes: protectedProcedure.query(async ({ ctx }) => {
     const notes = ctx.prisma.note.findMany({
       where: {
-        userId: ctx.userId,
+        userId: ctx.session.user.id,
       },
     });
 
@@ -15,11 +15,11 @@ export const notesRouter = router({
   createNote: protectedProcedure
     .input(z.object({ content: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const { prisma, userId } = ctx;
+      const { prisma } = ctx;
 
       const newNote = prisma.note.create({
         data: {
-          userId,
+          userId: ctx.session.user.id,
           content: input.content,
         },
       });

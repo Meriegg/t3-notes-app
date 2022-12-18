@@ -2,6 +2,7 @@ import getServerSession from "@/server/common/get-server-session";
 import Button from "@/Components/Ui/Button";
 import GithubLogo from "@/../public/icons/github-mark.svg";
 import { useRouter } from "next/router";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState, useEffect } from "react";
 import {
   GetServerSideProps,
@@ -22,6 +23,7 @@ const SignIn: NextPage<
 > = ({ providers }) => {
   const router = useRouter();
   const { error } = router.query;
+  const [parent] = useAutoAnimate<HTMLDivElement>();
   const [currentError, setCurrentError] = useState<string | string[] | null>(
     null
   );
@@ -50,7 +52,7 @@ const SignIn: NextPage<
 
   return (
     <div className="flex w-full items-center justify-center">
-      <div className="mt-32 flex flex-col items-center px-2">
+      <div className="mt-32 flex flex-col items-center px-2" ref={parent}>
         <h1 className="text-center text-6xl font-extrabold tracking-tighter">
           Sign in to continue!
         </h1>

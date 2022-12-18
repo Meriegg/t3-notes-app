@@ -12,21 +12,9 @@ const t = initTRPC.context<Context>().create({
 });
 
 const isAuthed = t.middleware(async ({ next, ctx }) => {
-  if (!ctx.session?.user) {
+  if (!ctx.session?.user || !ctx.session?.user?.id || !ctx.session) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
-    });
-  }
-
-  const dbUser = await ctx.prisma.user.findUnique({
-    where: {
-      email: ctx.session.user.email || "",
-    },
-  });
-  if (!dbUser || !dbUser?.id) {
-    throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "We were not able to find your data!",
     });
   }
 
@@ -34,7 +22,6 @@ const isAuthed = t.middleware(async ({ next, ctx }) => {
     ctx: {
       // Infers the `session` as non-nullable
       session: ctx.session,
-      userId: dbUser.id,
     },
   });
 });

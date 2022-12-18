@@ -22,10 +22,19 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const session = await getServerSession(ctx);
 
-  if (!session) {
+  if (!session || !session?.user) {
     return {
       redirect: {
         destination: "/auth/signIn",
+        permanent: false,
+      },
+    };
+  }
+
+  if (!session.user.fullSignupCompleted) {
+    return {
+      redirect: {
+        destination: "/auth/completeSignup",
         permanent: false,
       },
     };
