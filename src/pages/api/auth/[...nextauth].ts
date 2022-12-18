@@ -69,7 +69,10 @@ export const authOptions: AuthOptions = {
         return session;
       }
 
-      (session.user as (User | AdapterUser) & { id: string }).id = user.id;
+      session.user.id = user.id;
+      session.user.fullSignupCompleted = user.fullSignupCompleted;
+      session.user.username = user.username;
+      session.user.typeOfUser = user.typeOfUser;
       return session;
     },
   },

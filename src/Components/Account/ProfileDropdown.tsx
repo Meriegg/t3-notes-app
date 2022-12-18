@@ -1,6 +1,6 @@
 import Button from "../Ui/Button";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
 }
 
 const ProfileDropdown = ({ profilePicture }: Props) => {
+  const { data } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [parent] = useAutoAnimate<HTMLDivElement>();
 
@@ -26,6 +27,7 @@ const ProfileDropdown = ({ profilePicture }: Props) => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-gray-800 p-4 shadow-lg">
           <p className="text-base font-medium tracking-tight">Settings</p>
+          <p className="text-gray-300">{data?.user.typeOfUser} Account</p>
           <div className="shadow-xs rounded-md py-1">
             <Button
               onClick={() => signOut()}

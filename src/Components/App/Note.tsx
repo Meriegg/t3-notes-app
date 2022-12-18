@@ -35,7 +35,12 @@ const Note = ({ note }: Props) => {
   }, [isEditing]);
 
   return (
-    <div className="flex h-fit w-fit min-w-[400px] max-w-[750px] flex-col gap-4 rounded-md border-2 border-slate-700 bg-slate-800 px-8 pb-4 pt-6">
+    <div
+      className="flex h-fit flex-col gap-4 rounded-md border-2 border-slate-700 bg-slate-800 px-8 pb-4 pt-6"
+      style={{
+        width: "min(550px, 100%)",
+      }}
+    >
       {isEditing ? (
         <input
           ref={editInputRef}

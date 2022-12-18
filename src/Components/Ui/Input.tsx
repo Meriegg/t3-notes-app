@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 
 type Props = {
@@ -6,9 +7,21 @@ type Props = {
   error?: string | null;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const Input = ({ className, prefix, suffix, error, ...props }: Props) => {
+const Input = ({
+  className,
+  prefix,
+  suffix,
+  error,
+  disabled,
+  ...props
+}: Props) => {
   return (
-    <div className="flex rounded-md border border-gray-700 px-1 shadow-sm focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+    <div
+      className={clsx(
+        "flex rounded-md border border-gray-700 px-1 shadow-sm focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500",
+        disabled && "cursor-not-allowed opacity-75"
+      )}
+    >
       {prefix ? (
         <div className="flex items-center pl-2 text-gray-400 sm:text-sm">
           {prefix}
@@ -16,6 +29,7 @@ const Input = ({ className, prefix, suffix, error, ...props }: Props) => {
       ) : null}
       <input
         {...props}
+        disabled={disabled}
         type="text"
         className="block w-full rounded-md border-0 bg-transparent px-2 py-2 transition-none focus:outline-none focus:ring-0 sm:text-sm"
       />

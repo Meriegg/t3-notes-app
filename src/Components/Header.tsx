@@ -6,10 +6,15 @@ import { useSession } from "next-auth/react";
 const Header = () => {
   const { data } = useSession();
 
+  if (!data || !data?.user?.fullSignupCompleted) {
+    return null;
+  }
+
   return (
     <header className="flex items-center justify-between px-8 py-12 text-white xsm:px-4">
       <h1 className="ml-2 text-2xl font-extrabold tracking-tight">
-        Hello {data?.user?.name || data?.user?.email || null}!
+        Hello{" "}
+        {data?.user?.username || data?.user?.name || data?.user?.email || null}!
       </h1>
       {data ? (
         <ProfileDropdown profilePicture={data?.user?.image || ""} />

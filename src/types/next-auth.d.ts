@@ -9,4 +9,11 @@ declare module "next-auth" {
       typeOfUser: "NOT_SPECIFIED" | "COMPANY" | "PERSONAL";
     } & DefaultSession["user"];
   }
+
+  interface User {
+    id: string;
+    fullSignupCompleted: boolean;
+    username?: string;
+    typeOfUser: "NOT_SPECIFIED" | "COMPANY" | "PERSONAL";
+  }
 }
