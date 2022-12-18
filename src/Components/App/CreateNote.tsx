@@ -26,7 +26,7 @@ const CreateNote = () => {
 
   return (
     <div
-      className="rounded-md bg-gray-800 p-4"
+      className="glassmorphic rounded-md p-4"
       style={{
         width: "min(650px, 100%)",
       }}

@@ -12,6 +12,16 @@ const Notes = () => {
     );
   }
 
+  if (!data.length) {
+    return (
+      <div className="mt-4 w-full text-center">
+        <p className="text-base font-medium tracking-tight">
+          You Have no notes yet!
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-10 flex flex-wrap justify-evenly gap-6">
       {data.map((note) => (
