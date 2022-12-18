@@ -1,4 +1,5 @@
 import Button from "../Ui/Button";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 
@@ -8,9 +9,10 @@ interface Props {
 
 const ProfileDropdown = ({ profilePicture }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [parent] = useAutoAnimate<HTMLDivElement>();
 
   return (
-    <div className="relative">
+    <div className="relative" ref={parent}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center rounded-full text-sm leading-none focus:ring focus:ring-blue-600"

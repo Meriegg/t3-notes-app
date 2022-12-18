@@ -20,7 +20,7 @@ const Input = ({ className, prefix, suffix, error, ...props }: Props) => {
         className="block w-full rounded-md border-0 bg-transparent px-2 py-2 transition-none focus:outline-none focus:ring-0 sm:text-sm"
       />
       {error ? (
-        <div className="flex items-center pr-2 text-red-600 sm:text-sm">
+        <div className="flex items-center pr-2 text-center text-red-600 sm:text-sm">
           {error}
         </div>
       ) : null}
